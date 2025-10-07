@@ -5,6 +5,15 @@ const addButton=document.getElementById("addbutton"); //追加ボタン
 const tasklist=document.getElementById("tasklist"); //提出物リスト
 const submittedList=document.getElementById("submittedList"); //提出済みリスト
 let taskhistory=[]; //提出物履歴
+
+//提出内容の定数
+    const task={
+        title:titleInput.value,
+        subject:subjectInput.value,
+        deadline:deadlineInput.value,
+        isSubmitted: false
+    }; 
+
 //履歴消去関数
 function deleteTask(task){taskhistory = taskhistory.filter(t=>
             !(t.title === task.title &&
@@ -36,14 +45,16 @@ function addTaskToList(task,isSubmitted = false){
     //提出期限を超過しており、提出済みのものを削除する
     checkbox.addEventListener("change",function(){
         if (checkbox.checked){
+            task.isSubmitted=true;
             submittedList.appendChild(li);
             setTimeout(()=>{
-                if (checkbox.checked,diffDays>0){
+                if (checkbox.checked && diffDays>0){
                     deleteTask(task);
                     li.remove();
                 }
             },1000);
             } else{
+                task.isSubmitted=false;
                 tasklist.appendChild(li);
                 
             }
@@ -68,17 +79,11 @@ function addTaskToList(task,isSubmitted = false){
 window.addEventListener("DOMContentLoaded",function(){
     const savedTasks = JSON.parse(localStorage.getItem("tasks")||"[]");
     taskhistory=savedTasks;
-    savedTasks.forEach(task=>addTaskToList(task));
+    savedTasks.forEach(task=>addTaskToList(task, task.isSubmitted));
 });
 
 addButton.addEventListener("click",function(){
-    //提出内容の定数
-    const task={
-        title:titleInput.value,
-        subject:subjectInput.value,
-        deadline:deadlineInput.value
-    }; 
-
+    
     //入力されてるかの確認
     if(!task.title || !task.subject || !task.deadline){
         alert("すべての項目を入力してください")
@@ -98,11 +103,10 @@ addButton.addEventListener("click",function(){
     
     taskhistory.push(task);
     localStorage.setItem("tasks",JSON.stringify(taskhistory));
-    
+
     taskhistory.sort((a,b)=> new Date(a.deadline)-new Date(b.deadline));
     
     tasklist.innerHTML="";
-    submittedList.innerHTML="";
     taskhistory.forEach(t=>addTaskToList(t));
     
     titleInput.value="";
