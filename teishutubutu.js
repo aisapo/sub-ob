@@ -61,7 +61,7 @@ function addTaskToList(task,isSubmitted = false){
     } else{
         tasklist.appendChild(li);
 
-         taskhistory.sort((a,b)=> new Date(a.deadline)-new Date(b.deadline));
+    taskhistory.sort((a,b)=> new Date(a.deadline)-new Date(b.deadline));
     
     tasklist.innerHTML="";
     submittedList.innerHTML="";
@@ -104,8 +104,6 @@ addButton.addEventListener("click",function(){
     taskhistory.push(task);
     localStorage.setItem("tasks",JSON.stringify(taskhistory));
     
-    //deadlineを昇順にする
-
 
     titleInput.value="";
     subjectInput.value="";
