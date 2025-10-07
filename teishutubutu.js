@@ -98,15 +98,15 @@ addButton.addEventListener("click",function(){
     localStorage.setItem("tasks",JSON.stringify(taskhistory));
     
     //deadlineを昇順にする
-    if (!checkbox.checked){
     taskhistory.sort((a,b)=> new Date(a.deadline)-new Date(b.deadline));
     
     tasklist.innerHTML="";
     submittedList.innerHTML="";
     taskhistory.forEach(t=>addTaskToList(t));
-    }
+
     
     titleInput.value="";
     subjectInput.value="";
     deadlineInput.value="";
+
 });
