@@ -110,6 +110,9 @@ submissionStatus.addEventListener("change",function(){
     
     tasklist.innerHTML="";
     taskhistory.forEach(t=>addTaskToList(t));
+    console.log("false");
+    } else{
+        console.log("true")
     }
 })
     
