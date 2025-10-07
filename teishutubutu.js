@@ -57,6 +57,11 @@ function addTaskToList(task,isSubmitted = false){
                 task.isSubmitted=false;
                 tasklist.appendChild(li);
                 
+                taskhistory.sort((a,b)=> new Date(a.deadline)-new Date(b.deadline));
+                tasklist.innerHTML="";
+                taskhistory.filter(t=>!t.isSubmitted).forEach(t=>addTaskToList(t,false));
+                submittedList.innerHTML="";
+                taskhistory.filter(t=>t.isSubmitted).forEach(t=>addTaskToList(t,true));
             }
         localStorage.setItem("tasks",JSON.stringify(taskhistory));
         });
@@ -103,18 +108,8 @@ addButton.addEventListener("click",function(){
     
     taskhistory.push(task);
     localStorage.setItem("tasks",JSON.stringify(taskhistory));
-const submissionStatus=task.isSubmitted;
-submissionStatus.addEventListener("change",function(){
-    if(submissionStatus=false){
-    taskhistory.sort((a,b)=> new Date(a.deadline)-new Date(b.deadline));
-    
-    tasklist.innerHTML="";
+
     taskhistory.forEach(t=>addTaskToList(t));
-    console.log("false");
-    } else{
-        console.log("true")
-    }
-})
     
     titleInput.value="";
     subjectInput.value="";
