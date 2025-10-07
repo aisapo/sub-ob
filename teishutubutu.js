@@ -104,10 +104,13 @@ addButton.addEventListener("click",function(){
     taskhistory.push(task);
     localStorage.setItem("tasks",JSON.stringify(taskhistory));
 
+    if(task.isSubmitted=false){
     taskhistory.sort((a,b)=> new Date(a.deadline)-new Date(b.deadline));
     
     tasklist.innerHTML="";
-    taskhistory.forEach(t=>addTaskToList(t)); 
+    taskhistory.forEach(t=>addTaskToList(t));
+    }
+     
     titleInput.value="";
     subjectInput.value="";
     deadlineInput.value="";
