@@ -45,7 +45,7 @@ function addTaskToList(task,isSubmitted = false){
             },1000);
             } else{
                 tasklist.appendChild(li);
-
+                alert("未提出リストに追加された。")
             }
         
         });
