@@ -58,7 +58,7 @@ function addTaskToList(task,isSubmitted = false){
                 tasklist.appendChild(li);
                 
             }
-        
+        localStorage.setItem("tasks",JSON.stringify(taskhistory));
         });
     
 
