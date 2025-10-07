@@ -60,9 +60,13 @@ function addTaskToList(task,isSubmitted = false){
         submittedList.appendChild(li); 
     } else{
         tasklist.appendChild(li);
-    }
-    if(isSubmitted){
-    taskhistory.sort((a,b)=> new Date(a.deadline)-new Date(b.deadline));
+
+         taskhistory.sort((a,b)=> new Date(a.deadline)-new Date(b.deadline));
+    
+    tasklist.innerHTML="";
+    submittedList.innerHTML="";
+    taskhistory.forEach(t=>addTaskToList(t));
+
     }
 }
 //取得
@@ -101,15 +105,9 @@ addButton.addEventListener("click",function(){
     localStorage.setItem("tasks",JSON.stringify(taskhistory));
     
     //deadlineを昇順にする
-    taskhistory.sort((a,b)=> new Date(a.deadline)-new Date(b.deadline));
-    
-    tasklist.innerHTML="";
-    submittedList.innerHTML="";
-    taskhistory.forEach(t=>addTaskToList(t));
 
-    
+
     titleInput.value="";
     subjectInput.value="";
     deadlineInput.value="";
-
 });
