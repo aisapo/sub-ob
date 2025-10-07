@@ -62,9 +62,6 @@ function addTaskToList(task,isSubmitted = false){
         submittedList.appendChild(li); 
     } else{
         tasklist.appendChild(li);
-
-    
-
     }
 }
 //取得
