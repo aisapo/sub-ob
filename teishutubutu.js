@@ -6,8 +6,6 @@ const tasklist=document.getElementById("tasklist"); //提出物リスト
 const submittedList=document.getElementById("submittedList"); //提出済みリスト
 let taskhistory=[]; //提出物履歴
 
-
-
 //履歴消去関数
 function deleteTask(task){taskhistory = taskhistory.filter(t=>
             !(t.title === task.title &&
