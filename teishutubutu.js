@@ -52,6 +52,13 @@ function addTaskToList(task,isSubmitted = false){
                 submittedList.innerHTML="";
                 taskhistory.forEach(t=>addTaskToList(t));
             }
+        if (!checkbox.checked){
+            taskhistory.sort((a,b)=> new Date(a.deadline)-new Date(b.deadline));
+    
+            tasklist.innerHTML="";
+            submittedList.innerHTML="";
+            taskhistory.forEach(t=>addTaskToList(t));
+        }
         });
     
 
