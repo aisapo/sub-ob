@@ -61,8 +61,9 @@ function addTaskToList(task,isSubmitted = false){
     } else{
         tasklist.appendChild(li);
     }
-
+    if(isSubmitted){
     taskhistory.sort((a,b)=> new Date(a.deadline)-new Date(b.deadline));
+    }
 }
 //取得
 window.addEventListener("DOMContentLoaded",function(){
