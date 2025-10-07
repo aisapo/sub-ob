@@ -61,11 +61,11 @@ function addTaskToList(task,isSubmitted = false){
     } else{
         tasklist.appendChild(li);
 
-    taskhistory.sort((a,b)=> new Date(a.deadline)-new Date(b.deadline));
+        taskhistory.sort((a,b)=> new Date(a.deadline)-new Date(b.deadline));
     
-    tasklist.innerHTML="";
-    submittedList.innerHTML="";
-    taskhistory.forEach(t=>addTaskToList(t));
+        tasklist.innerHTML="";
+        submittedList.innerHTML="";
+        taskhistory.forEach(t=>addTaskToList(t));
 
     }
 }
