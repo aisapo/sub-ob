@@ -107,8 +107,7 @@ addButton.addEventListener("click",function(){
     taskhistory.sort((a,b)=> new Date(a.deadline)-new Date(b.deadline));
     
     tasklist.innerHTML="";
-    taskhistory.forEach(t=>addTaskToList(t && task.isSubmitted));
-    
+    taskhistory.forEach(t=>addTaskToList(t)); 
     titleInput.value="";
     subjectInput.value="";
     deadlineInput.value="";
