@@ -39,6 +39,7 @@ function addTaskToList(task,isSubmitted = false){
             task.isSubmitted=checkbox.checked;
             localStorage.setItem("tasks",JSON.stringify(taskhistory));
             renderLists();
+            location.reload();
         });
     
 
