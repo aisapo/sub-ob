@@ -13,7 +13,7 @@ const task={
     isSubmitted: false
 }; 
 //リストの表示内容の定数
-    const li=document.createElement("li");
+const li=document.createElement("li");
 
 //履歴消去関数
 function deleteTask(task){taskhistory = taskhistory.filter(t=>
