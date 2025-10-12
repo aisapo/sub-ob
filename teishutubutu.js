@@ -99,7 +99,7 @@ addButton.addEventListener("click",function(){
     taskhistory.push(task);
     localStorage.setItem("tasks",JSON.stringify(taskhistory));
     renderLists();
-    
+
     titleInput.value="";
     subjectInput.value="";
     deadlineInput.value="";
