@@ -20,7 +20,10 @@ function addTaskToList(task,isSubmitted = false){
     const checkbox=document.createElement("input");
     checkbox.type="checkbox";
     checkbox.checked = isSubmitted;
-
+    li.append(checkbox, document.createTextNode(`
+        課題内容:${task.title},科目:${task.subject},締切:${task.deadline},${overdueText}
+        `));
+};
 //提出期限超過日数
     let overdueText="";
     const today=new Date();
@@ -29,11 +32,8 @@ function addTaskToList(task,isSubmitted = false){
     const diffDays=Math.floor(diffTime/(1000*60*60*24));
     if (today>deadlineDate){
         overdueText=`【提出期限超過:${diffDays}日】`;
-    }
+    };
 
-    li.append(checkbox, document.createTextNode(`
-        課題内容:${task.title},科目:${task.subject},締切:${task.deadline},${overdueText}
-        `));
     //提出期限を超過しており、提出済みのものを削除する
     checkbox.addEventListener("change",function(){
             task.isSubmitted=checkbox.checked;
@@ -58,7 +58,7 @@ function addTaskToList(task,isSubmitted = false){
     } else{
         tasklist.appendChild(li);
     }
-}
+
 
 //取得
 window.addEventListener("DOMContentLoaded",function(){
@@ -67,9 +67,6 @@ window.addEventListener("DOMContentLoaded",function(){
 });
 
 addButton.addEventListener("click",function(){
-    li.append(checkbox, document.createTextNode(`
-        課題内容:${task.title},科目:${task.subject},締切:${task.deadline},${overdueText}
-        `));
     //提出内容の定数
     const task={
         title:titleInput.value,
