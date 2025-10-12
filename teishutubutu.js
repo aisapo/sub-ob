@@ -39,7 +39,6 @@ function addTaskToList(task,isSubmitted = false){
             task.isSubmitted=checkbox.checked;
             localStorage.setItem("tasks",JSON.stringify(taskhistory));
             renderLists();
-            location.reload();
         });
     
 
@@ -71,6 +70,7 @@ window.addEventListener("DOMContentLoaded",function(){
 });
 
 addButton.addEventListener("click",function(){
+    location.reload();
     //提出内容の定数
     const task={
         title:titleInput.value,
