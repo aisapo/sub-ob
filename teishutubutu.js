@@ -66,6 +66,7 @@ window.addEventListener("DOMContentLoaded",function(){
 });
 
 addButton.addEventListener("click",function(){
+    addTaskToList();
     //提出内容の定数
     const task={
         title:titleInput.value,
