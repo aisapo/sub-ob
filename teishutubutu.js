@@ -44,8 +44,13 @@ function addTaskToList(task,isSubmitted = false){
     const deletebutton=document.createElement("button");
     deletebutton.textContent="🗑️delete";
     deletebutton.addEventListener("click",function(){
-        deleteTask(task);
-        li.remove();
+        if(confirm("本当に消しますか？")){
+            deleteTask(task);
+            li.remove();
+        } else{
+            alert(deleteはキャンセルされました);
+            return;
+        }
     });
     li.append(deletebutton);
     if (isSubmitted){
