@@ -70,7 +70,7 @@ window.addEventListener("DOMContentLoaded",function(){
 });
 
 addButton.addEventListener("click",function(){
-    location.reload();
+
     //提出内容の定数
     const task={
         title:titleInput.value,
@@ -102,4 +102,5 @@ addButton.addEventListener("click",function(){
     titleInput.value="";
     subjectInput.value="";
     deadlineInput.value="";
+    location.reload();
 });
