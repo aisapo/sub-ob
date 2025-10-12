@@ -22,10 +22,10 @@ function deleteTask(task){taskhistory = taskhistory.filter(t=>
         } 
 
 //課題をリストに追加する関数
+const checkbox=document.createElement("input");
+    checkbox.type="checkbox";
 function addTaskToList(task,isSubmitted = false){
     const li=document.createElement("li");
-    const checkbox=document.createElement("input");
-    checkbox.type="checkbox";
     li.append(checkbox, document.createTextNode(`
         課題内容:${task.title},科目:${task.subject},締切:${task.deadline},${overdueText}
         `));
