@@ -2,6 +2,7 @@ const titleInput=document.getElementById("title"); //提出物の名前
 const subjectInput=document.getElementById("subject"); //提出物の科目
 const deadlineInput=document.getElementById("deadline"); //提出期限
 const addButton=document.getElementById("addbutton"); //追加ボタン
+const deleteButton=document.getElementById("deleteButton");//消去ボタン
 const tasklist=document.getElementById("tasklist"); //提出物リスト
 const submittedList=document.getElementById("submittedList"); //提出済みリスト
 let taskhistory=[]; //提出物履歴
@@ -23,7 +24,7 @@ function addTaskToList(task,isSubmitted = false){
         課題内容:${task.title},科目:${task.subject},締切:${task.deadline},${overdueText}
         `));
     };
-    
+
 //提出期限超過日数
     let overdueText="";
     const today=new Date();
@@ -39,10 +40,7 @@ function addTaskToList(task,isSubmitted = false){
             localStorage.setItem("tasks",JSON.stringify(taskhistory));
         });
     
-
-    const deletebutton=document.createElement("button");
-    deletebutton.textContent="🗑️delete";
-    deletebutton.addEventListener("click",function(){
+    deleteButton.addEventListener("click",function(){
         if(confirm("本当に消しますか？")){
             deleteTask(task);
             li.remove();
@@ -51,7 +49,7 @@ function addTaskToList(task,isSubmitted = false){
             return;
         }
     });
-    li.append(deletebutton);
+    li.append(deleteButton);
     if (isSubmitted){
         submittedList.appendChild(li); 
     } else{
