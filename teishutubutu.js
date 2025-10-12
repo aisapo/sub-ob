@@ -38,7 +38,6 @@ function addTaskToList(task,isSubmitted = false){
     checkbox.addEventListener("change",function(){
             task.isSubmitted=checkbox.checked;
             localStorage.setItem("tasks",JSON.stringify(taskhistory));
-            renderLists();
         });
     
 
@@ -46,7 +45,7 @@ function addTaskToList(task,isSubmitted = false){
     deletebutton.textContent="🗑️delete";
     deletebutton.addEventListener("click",function(){
         deleteTask(task);
-        renderLists();
+        li.remove();
     });
     li.append(deletebutton);
     if (isSubmitted){
@@ -56,17 +55,10 @@ function addTaskToList(task,isSubmitted = false){
     }
 }
 
-function renderLists(){
-    tasklist.innerHTML="";
-    submittedList.innerHTML="";
-    taskhistory.forEach(task=>addTaskToList(task,task.isSubmitted));
-}
-
 //取得
 window.addEventListener("DOMContentLoaded",function(){
     const savedTasks = JSON.parse(localStorage.getItem("tasks")||"[]");
     taskhistory=savedTasks;
-    renderLists();
 });
 
 addButton.addEventListener("click",function(){
@@ -98,7 +90,6 @@ addButton.addEventListener("click",function(){
     
     taskhistory.push(task);
     localStorage.setItem("tasks",JSON.stringify(taskhistory));
-    renderLists();
 
     titleInput.value="";
     subjectInput.value="";
