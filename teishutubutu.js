@@ -102,5 +102,4 @@ addButton.addEventListener("click",function(){
     titleInput.value="";
     subjectInput.value="";
     deadlineInput.value="";
-    location.reload();
 });
