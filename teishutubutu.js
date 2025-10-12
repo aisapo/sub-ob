@@ -46,7 +46,7 @@ function addTaskToList(task,isSubmitted = false){
     deletebutton.textContent="🗑️delete";
     deletebutton.addEventListener("click",function(){
         deleteTask(task);
-        li.remove();
+        renderLists();
     });
     li.append(deletebutton);
     if (isSubmitted){
@@ -98,6 +98,7 @@ addButton.addEventListener("click",function(){
     
     taskhistory.push(task);
     localStorage.setItem("tasks",JSON.stringify(taskhistory));
+    renderLists();
     
     titleInput.value="";
     subjectInput.value="";
