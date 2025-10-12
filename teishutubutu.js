@@ -19,7 +19,6 @@ function addTaskToList(task,isSubmitted = false){
     const li=document.createElement("li");
     const checkbox=document.createElement("input");
     checkbox.type="checkbox";
-    checkbox.checked = isSubmitted;
     li.append(checkbox, document.createTextNode(`
         課題内容:${task.title},科目:${task.subject},締切:${task.deadline},${overdueText}
         `));
