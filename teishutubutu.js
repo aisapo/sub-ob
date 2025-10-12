@@ -5,6 +5,13 @@ const addButton=document.getElementById("addbutton"); //追加ボタン
 const tasklist=document.getElementById("tasklist"); //提出物リスト
 const submittedList=document.getElementById("submittedList"); //提出済みリスト
 let taskhistory=[]; //提出物履歴
+//提出内容の定数
+    const task={
+        title:titleInput.value,
+        subject:subjectInput.value,
+        deadline:deadlineInput.value,
+        isSubmitted: false
+    }; 
 
 //履歴消去関数
 function deleteTask(task){taskhistory = taskhistory.filter(t=>
