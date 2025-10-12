@@ -2,7 +2,6 @@ const titleInput=document.getElementById("title"); //提出物の名前
 const subjectInput=document.getElementById("subject"); //提出物の科目
 const deadlineInput=document.getElementById("deadline"); //提出期限
 const addButton=document.getElementById("addbutton"); //追加ボタン
-const deleteButton=document.getElementById("deleteButton");//消去ボタン
 const tasklist=document.getElementById("tasklist"); //提出物リスト
 const submittedList=document.getElementById("submittedList"); //提出済みリスト
 let taskhistory=[]; //提出物履歴
@@ -40,7 +39,9 @@ function addTaskToList(task,isSubmitted = false){
             localStorage.setItem("tasks",JSON.stringify(taskhistory));
         });
     
-    deleteButton.addEventListener("click",function(){
+    const deleteButton=document.createElement("button");
+    deleteButton.textContent="🗑️delete";
+    deleteButton.addEventListener("click",()=>{
         if(confirm("本当に消しますか？")){
             deleteTask(task);
             li.remove();
