@@ -67,7 +67,9 @@ window.addEventListener("DOMContentLoaded",function(){
 });
 
 addButton.addEventListener("click",function(){
-
+    li.append(checkbox, document.createTextNode(`
+        課題内容:${task.title},科目:${task.subject},締切:${task.deadline},${overdueText}
+        `));
     //提出内容の定数
     const task={
         title:titleInput.value,
