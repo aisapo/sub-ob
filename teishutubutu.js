@@ -23,6 +23,7 @@ function addTaskToList(task,isSubmitted = false){
         課題内容:${task.title},科目:${task.subject},締切:${task.deadline},${overdueText}
         `));
     };
+    
 //提出期限超過日数
     let overdueText="";
     const today=new Date();
