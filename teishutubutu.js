@@ -13,7 +13,7 @@ function deleteTask(task){taskhistory = taskhistory.filter(t=>
                 t.deadline === task.deadline))
             localStorage.setItem("tasks",JSON.stringify(taskhistory));
         } 
-
+        localStorage.setItem("tasks",JSON.stringify(taskhistory));
 function addTaskToList(task,isSubmitted = false){
 
     const checkbox=document.createElement("input");
@@ -43,25 +43,31 @@ function addTaskToList(task,isSubmitted = false){
             return;
         }
     });
+    checkbox.addEventListener("change",function(){
+            task.isSubmitted=checkbox.checked;
+            localStorage.setItem("tasks",JSON.stringify(taskhistory));
+            li.remove();
+            if (task.isSubmitted) {
+                submittedList.appendChild(li);
+            } else {
+                tasklist.appendChild(li);
+            }
+        });
+        li.append(checkbox, document.createTextNode(`
+        課題内容:${task.title},科目:${task.subject},締切:${task.deadline},${overdueText}
+        `),deleteButton);
     if (isSubmitted){
         submittedList.appendChild(li); 
     } else{
         tasklist.appendChild(li);
     }
-    //提出期限を超過しており、提出済みのものを削除する
-    checkbox.addEventListener("change",function(){
-            task.isSubmitted=checkbox.checked;
-            localStorage.setItem("tasks",JSON.stringify(taskhistory));
-        });
-    li.append(checkbox, document.createTextNode(`
-        課題内容:${task.title},科目:${task.subject},締切:${task.deadline},${overdueText}
-        `));
-    li.append(deleteButton);
+    
 };
 //取得
 window.addEventListener("DOMContentLoaded",function(){
     const savedTasks = JSON.parse(localStorage.getItem("tasks")||"[]");
     taskhistory=savedTasks;
+    taskhistory.forEach(task=>addTaskToList(task.task.isSubmitted));
 });
 
 addButton.addEventListener("click",function(){
@@ -78,6 +84,7 @@ addButton.addEventListener("click",function(){
         alert("すべての項目を入力してください")
         return;
     }; 
+
     const exists=taskhistory.some(t=>
     t.title === task.title &&
     t.subject === task.subject &&
@@ -92,7 +99,7 @@ addButton.addEventListener("click",function(){
     taskhistory.push(task);
     localStorage.setItem("tasks",JSON.stringify(taskhistory));
     addTaskToList(task);
-    
+
     titleInput.value="";
     subjectInput.value="";
     deadlineInput.value="";
