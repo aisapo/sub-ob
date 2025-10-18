@@ -72,22 +72,23 @@ addButton.addEventListener("click",function(){
         deadline:deadlineInput.value,
         isSubmitted: false
     }; 
-    addTaskToList(task);
     
     //入力されてるかの確認
     if(!task.title || !task.subject || !task.deadline){
         alert("すべての項目を入力してください")
         return;
     }; 
-const exists=taskhistory.some(t=>
-t.title === task.title &&
-  t.subject === task.subject &&
-  t.deadline === task.deadline
-);
+    const exists=taskhistory.some(t=>
+    t.title === task.title &&
+    t.subject === task.subject &&
+    t.deadline === task.deadline
+    );
+    
     if (exists) {
         alert("この課題は既に追加されています");
         return;
     }
+    addTaskToList(task);
     
     taskhistory.push(task);
     localStorage.setItem("tasks",JSON.stringify(taskhistory));
