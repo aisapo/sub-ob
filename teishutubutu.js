@@ -83,16 +83,16 @@ addButton.addEventListener("click",function(){
     t.subject === task.subject &&
     t.deadline === task.deadline
     );
-    
+
     if (exists) {
         alert("この課題は既に追加されています");
         return;
     }
-    addTaskToList(task);
     
     taskhistory.push(task);
     localStorage.setItem("tasks",JSON.stringify(taskhistory));
-
+    addTaskToList(task);
+    
     titleInput.value="";
     subjectInput.value="";
     deadlineInput.value="";
