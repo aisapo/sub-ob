@@ -8,7 +8,8 @@ let taskhistory=[]; //提出物履歴
 //リストの表示内容の定数
 const li=document.createElement("li");
 
-const task={
+//リストの内容
+const tasks={
     title:titleInput.value,
     subject:subjectInput.value,
     deadline:deadlineInput.value,
@@ -17,7 +18,7 @@ const task={
 
 //履歴消去関数
 function deleteTask(task){taskhistory = taskhistory.filter(t=>
-            !(t.title === task.title &&
+            !(t.title === tasks.title &&
                 t.subject === task.subject &&
                 t.deadline === task.deadline))
             localStorage.setItem("tasks",JSON.stringify(taskhistory));
@@ -29,10 +30,11 @@ const checkbox=document.createElement("input");
     checkbox.type="checkbox";
 
 const isSubmitted=checkbox.checked;
-function addTaskToList(task,_isSubmitted = false){
+function addTaskToList(_task,_isSubmitted = false){
     li.append(checkbox, document.createTextNode(`
-        課題内容:${task.title},科目:${task.subject},締切:${task.deadline},${overdueText}
+        課題内容:${tasks.title},科目:${tasks.subject},締切:${tasks.deadline},${overdueText}
         `));
+    li.append(deleteButton);
     };
 
 //提出期限超過日数
@@ -61,7 +63,6 @@ function addTaskToList(task,_isSubmitted = false){
             return;
         }
     });
-    li.append(deleteButton);
     if (isSubmitted){
         submittedList.appendChild(li); 
     } else{
