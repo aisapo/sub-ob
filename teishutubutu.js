@@ -5,15 +5,15 @@ const addButton=document.getElementById("addbutton"); //追加ボタン
 const tasklist=document.getElementById("tasklist"); //提出物リスト
 const submittedList=document.getElementById("submittedList"); //提出済みリスト
 let taskhistory=[]; //提出物履歴
-//提出内容の定数
+//リストの表示内容の定数
+const li=document.createElement("li");
+
 const task={
     title:titleInput.value,
     subject:subjectInput.value,
     deadline:deadlineInput.value,
     isSubmitted: false
-}; 
-//リストの表示内容の定数
-const li=document.createElement("li");
+    }; 
 
 //履歴消去関数
 function deleteTask(task){taskhistory = taskhistory.filter(t=>
@@ -24,8 +24,10 @@ function deleteTask(task){taskhistory = taskhistory.filter(t=>
         } 
 
 //課題をリストに追加する関数
+
 const checkbox=document.createElement("input");
     checkbox.type="checkbox";
+
 const isSubmitted=checkbox.checked;
 function addTaskToList(task,_isSubmitted = false){
     li.append(checkbox, document.createTextNode(`
@@ -73,7 +75,7 @@ window.addEventListener("DOMContentLoaded",function(){
 });
 
 addButton.addEventListener("click",function(){
-    addTaskToList();
+    addTaskToList(task);
     
     //入力されてるかの確認
     if(!task.title || !task.subject || !task.deadline){
