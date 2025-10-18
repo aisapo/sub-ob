@@ -40,7 +40,7 @@ function addTaskToList(_task,_isSubmitted = false){
 //提出期限超過日数
     let overdueText="";
     const today=new Date();
-    const deadlineDate=new Date(task.deadline);
+    const deadlineDate=new Date(tasks.deadline);
     const diffTime=today-deadlineDate;
     const diffDays=Math.floor(diffTime/(1000*60*60*24));
     if (today>deadlineDate){
@@ -56,7 +56,7 @@ function addTaskToList(_task,_isSubmitted = false){
     deleteButton.textContent="🗑️delete";
     deleteButton.addEventListener("click",()=>{
         if(confirm("本当に消しますか？")){
-            deleteTask(task);
+            deleteTask(tasks);
             li.remove();
         } else{
             alert(deleteはキャンセルされました);
@@ -76,10 +76,10 @@ window.addEventListener("DOMContentLoaded",function(){
 });
 
 addButton.addEventListener("click",function(){
-    addTaskToList(task);
+    addTaskToList(tasks);
     
     //入力されてるかの確認
-    if(!task.title || !task.subject || !task.deadline){
+    if(!tasks.title || !tasks.subject || !tasks.deadline){
         alert("すべての項目を入力してください")
         return;
     }; 
@@ -89,7 +89,7 @@ addButton.addEventListener("click",function(){
         return;
     }
     
-    taskhistory.push(task);
+    taskhistory.push(tasks);
     localStorage.setItem("tasks",JSON.stringify(taskhistory));
 
     titleInput.value="";
