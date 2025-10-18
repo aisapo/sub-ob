@@ -5,20 +5,10 @@ const addButton=document.getElementById("addbutton"); //追加ボタン
 const tasklist=document.getElementById("tasklist"); //提出物リスト
 const submittedList=document.getElementById("submittedList"); //提出済みリスト
 let taskhistory=[]; //提出物履歴
-//リストの表示内容の定数
-const li=document.createElement("li");
-
-//リストの内容
-const tasks={
-    title:titleInput.value,
-    subject:subjectInput.value,
-    deadline:deadlineInput.value,
-    isSubmitted: false
-    }; 
 
 //履歴消去関数
 function deleteTask(task){taskhistory = taskhistory.filter(t=>
-            !(t.title === tasks.title &&
+            !(t.title === task.title &&
                 t.subject === task.subject &&
                 t.deadline === task.deadline))
             localStorage.setItem("tasks",JSON.stringify(taskhistory));
@@ -30,17 +20,13 @@ const checkbox=document.createElement("input");
     checkbox.type="checkbox";
 
 const isSubmitted=checkbox.checked;
-function addTaskToList(_task,_isSubmitted = false){
-    li.append(checkbox, document.createTextNode(`
-        課題内容:${tasks.title},科目:${tasks.subject},締切:${tasks.deadline},${overdueText}
-        `));
-    li.append(deleteButton);
-    };
 
-//提出期限超過日数
+function addTaskToList(task,_isSubmitted = false){
+    //リストの表示内容の定数
+    const li=document.createElement("li");
     let overdueText="";
     const today=new Date();
-    const deadlineDate=new Date(tasks.deadline);
+    const deadlineDate=new Date(task.deadline);
     const diffTime=today-deadlineDate;
     const diffDays=Math.floor(diffTime/(1000*60*60*24));
     if (today>deadlineDate){
@@ -51,6 +37,10 @@ function addTaskToList(_task,_isSubmitted = false){
             task.isSubmitted=checkbox.checked;
             localStorage.setItem("tasks",JSON.stringify(taskhistory));
         });
+    li.append(checkbox, document.createTextNode(`
+        課題内容:${task.title},科目:${task.subject},締切:${task.deadline},${overdueText}
+        `));
+    li.append(deleteButton);
     
     const deleteButton=document.createElement("button");
     deleteButton.textContent="🗑️delete";
@@ -68,7 +58,7 @@ function addTaskToList(_task,_isSubmitted = false){
     } else{
         tasklist.appendChild(li);
     }
-
+};
 //取得
 window.addEventListener("DOMContentLoaded",function(){
     const savedTasks = JSON.parse(localStorage.getItem("tasks")||"[]");
@@ -76,20 +66,31 @@ window.addEventListener("DOMContentLoaded",function(){
 });
 
 addButton.addEventListener("click",function(){
-    addTaskToList(tasks);
+    //リストの内容
+    const task={
+        title:titleInput.value,
+        subject:subjectInput.value,
+        deadline:deadlineInput.value,
+        isSubmitted: false
+    }; 
+    addTaskToList(task);
     
     //入力されてるかの確認
-    if(!tasks.title || !tasks.subject || !tasks.deadline){
+    if(!task.title || !task.subject || !task.deadline){
         alert("すべての項目を入力してください")
         return;
     }; 
-
+const exists=taskhistory.some(t=>
+t.title === task.title &&
+  t.subject === task.subject &&
+  t.deadline === task.deadline
+);
     if (exists) {
         alert("この課題は既に追加されています");
         return;
     }
     
-    taskhistory.push(tasks);
+    taskhistory.push(task);
     localStorage.setItem("tasks",JSON.stringify(taskhistory));
 
     titleInput.value="";
