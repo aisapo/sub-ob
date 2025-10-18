@@ -83,12 +83,6 @@ addButton.addEventListener("click",function(){
         return;
     }; 
 
-    //存在の確認ができる定数
-    const exists = taskhistory.some(t=>
-        t.title === task.title &&
-        t.subject === task.subject &&
-        t.deadline === task.deadline
-    ); 
     if (exists) {
         alert("この課題は既に追加されています");
         return;
