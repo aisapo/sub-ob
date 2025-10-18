@@ -14,14 +14,13 @@ function deleteTask(task){taskhistory = taskhistory.filter(t=>
             localStorage.setItem("tasks",JSON.stringify(taskhistory));
         } 
 
-//課題をリストに追加する関数
+function addTaskToList(task,isSubmitted = false){
 
-const checkbox=document.createElement("input");
+    const checkbox=document.createElement("input");
     checkbox.type="checkbox";
 
-const isSubmitted=checkbox.checked;
+    const isSubmitted=checkbox.checked;
 
-function addTaskToList(task,_isSubmitted = false){
     //リストの表示内容の定数
     const li=document.createElement("li");
     let overdueText="";
@@ -32,21 +31,12 @@ function addTaskToList(task,_isSubmitted = false){
     if (today>deadlineDate){
         overdueText=`【提出期限超過:${diffDays}日】`;
     };
-    //提出期限を超過しており、提出済みのものを削除する
-    checkbox.addEventListener("change",function(){
-            task.isSubmitted=checkbox.checked;
-            localStorage.setItem("tasks",JSON.stringify(taskhistory));
-        });
-    li.append(checkbox, document.createTextNode(`
-        課題内容:${task.title},科目:${task.subject},締切:${task.deadline},${overdueText}
-        `));
-    li.append(deleteButton);
-    
+
     const deleteButton=document.createElement("button");
     deleteButton.textContent="🗑️delete";
     deleteButton.addEventListener("click",()=>{
         if(confirm("本当に消しますか？")){
-            deleteTask(tasks);
+            deleteTask(task);
             li.remove();
         } else{
             alert(deleteはキャンセルされました);
@@ -58,6 +48,15 @@ function addTaskToList(task,_isSubmitted = false){
     } else{
         tasklist.appendChild(li);
     }
+    //提出期限を超過しており、提出済みのものを削除する
+    checkbox.addEventListener("change",function(){
+            task.isSubmitted=checkbox.checked;
+            localStorage.setItem("tasks",JSON.stringify(taskhistory));
+        });
+    li.append(checkbox, document.createTextNode(`
+        課題内容:${task.title},科目:${task.subject},締切:${task.deadline},${overdueText}
+        `));
+    li.append(deleteButton);
 };
 //取得
 window.addEventListener("DOMContentLoaded",function(){
