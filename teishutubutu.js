@@ -27,7 +27,7 @@ function deleteTask(task){taskhistory = taskhistory.filter(t=>
 const checkbox=document.createElement("input");
     checkbox.type="checkbox";
 const isSubmitted=checkbox.checked;
-function addTaskToList(task,isSubmitted = false){
+function addTaskToList(task,_isSubmitted = false){
     li.append(checkbox, document.createTextNode(`
         課題内容:${task.title},科目:${task.subject},締切:${task.deadline},${overdueText}
         `));
