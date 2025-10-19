@@ -29,7 +29,7 @@ function addTaskToList(task,isSubmitted = false){
     if (today>deadlineDate){
         overdueText=`【提出期限超過:${diffDays}日】`;
     };
-    if (today>deadlineDate,isSubmitted){
+    if (today>deadlineDate,isSubmitted=true){
         deleteTask(task)
     };
 
