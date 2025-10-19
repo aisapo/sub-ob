@@ -29,9 +29,6 @@ function addTaskToList(task,isSubmitted = false){
     if (today>deadlineDate){
         overdueText=`【提出期限超過:${diffDays}日】`;
     };
-    if (today>deadlineDate,isSubmitted=true){
-        deleteTask(task)
-    };
 
     const deleteButton=document.createElement("button");
     deleteButton.textContent="🗑️delete";
@@ -71,6 +68,9 @@ window.addEventListener("DOMContentLoaded",function(){
     taskhistory.forEach(task=>addTaskToList(task,task.isSubmitted));
 });
 
+if(diffDays<0,isSubmitted=true){
+    deleteTask(task)
+};
 addButton.addEventListener("click",function(){
     //リストの内容
     const task={
