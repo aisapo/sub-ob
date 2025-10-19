@@ -96,7 +96,7 @@ addButton.addEventListener("click",function(){
     
     taskhistory.push(task);
     localStorage.setItem("tasks",JSON.stringify(taskhistory));
-    addTaskToList(task,isSubmitted=false);
+    addTaskToList(task);
 
     titleInput.value="";
     subjectInput.value="";
