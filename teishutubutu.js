@@ -19,8 +19,6 @@ function addTaskToList(task,isSubmitted = false){
     const checkbox=document.createElement("input");
     checkbox.type="checkbox";
 
-    const isSubmitted=checkbox.checked;
-
     //リストの表示内容の定数
     const li=document.createElement("li");
     let overdueText="";
@@ -39,7 +37,7 @@ function addTaskToList(task,isSubmitted = false){
             deleteTask(task);
             li.remove();
         } else{
-            alert(deleteはキャンセルされました);
+            alert("deleteはキャンセルされました");
             return;
         }
     });
@@ -67,7 +65,7 @@ function addTaskToList(task,isSubmitted = false){
 window.addEventListener("DOMContentLoaded",function(){
     const savedTasks = JSON.parse(localStorage.getItem("tasks")||"[]");
     taskhistory=savedTasks;
-    taskhistory.forEach(task=>addTaskToList(task.task.isSubmitted));
+    taskhistory.forEach(task=>addTaskToList(task,task.isSubmitted));
 });
 
 addButton.addEventListener("click",function(){
