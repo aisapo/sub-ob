@@ -13,7 +13,7 @@ function deleteTask(task){taskhistory = taskhistory.filter(t=>
                 t.deadline === task.deadline))
             localStorage.setItem("tasks",JSON.stringify(taskhistory));
         } 
-        localStorage.setItem("tasks",JSON.stringify(taskhistory));
+        
 function addTaskToList(task,isSubmitted = false){
 
     const checkbox=document.createElement("input");
