@@ -30,7 +30,7 @@ function addTaskToList(task,isSubmitted = false){
         overdueText=`【提出期限超過:${diffDays}日】`;
     };
     if (today>deadlineDate,isSubmitted){
-        delete(task)
+        deleteTask(task)
     };
 
     const deleteButton=document.createElement("button");
