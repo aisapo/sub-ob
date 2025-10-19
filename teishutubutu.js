@@ -68,9 +68,6 @@ window.addEventListener("DOMContentLoaded",function(){
     taskhistory.forEach(task=>addTaskToList(task,task.isSubmitted));
 });
 
-if(diffDays<0,isSubmitted=true){
-    deleteTask(task)
-};
 addButton.addEventListener("click",function(){
     //リストの内容
     const task={
